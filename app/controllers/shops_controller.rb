@@ -1,13 +1,18 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  before_action :set_shop, only: [:show]
+  before_action :set_shop, only: [:show, :create]
   before_action :shop_params, only: [:create]
 
   def show
+    @review = Review.new
   end
 
   def index
     @shops = Shop.all
+  end
+
+  def new
+    @shop = Shop.new
   end
 
   def create
