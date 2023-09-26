@@ -1,2 +1,23 @@
-<h1>Shops#index</h1>
-<p>Find me in app/views/shops/index.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_url 'shop-unsplash.jpg' %>)">
+  <div class="container">
+    <h1>Find all Humana shops</h1>
+    <p>in your favourite city Berlin</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0"></h3>
+    <%# <%= link_to "Create a movie list", new_shop_path, class: "btn btn-flat" %>
+  </div>
+
+  <div class="cards">
+    <% @shops.each do |shop| %>
+      <%= link_to shop_path(shop), class:"text-decoration-none" do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'shop-card-unsplash.jpg' %>)">
+          <%= shop.name %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
