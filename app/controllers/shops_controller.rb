@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  before_action :set_shop, only: [:show, :create]
+  before_action :set_shop, only: [:show]
   before_action :shop_params, only: [:create]
 
   def show
@@ -16,9 +16,10 @@ class ShopsController < ApplicationController
   end
 
   def create
+
     @shop = Shop.new(shop_params)
     if @shop.save
-      render :show, status: :created
+      redirect_to shop_path(@shop.id)
     else
       flash[:alert] = "Couldn't create the shop"
       render :new, status: :unprocessable_entity

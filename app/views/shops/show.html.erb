@@ -1,4 +1,11 @@
-<div class="container py-5">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_url 'shop-card-unsplash.jpg' %>)">
+  <div class="container">
+    <h1><%= @shop.name %></h1>
+    <p><%= @shop.street %></p>
+  </div>
+</div>
+
+<div class="container py-4">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <%= link_to 'Back', root_path, class: "btn btn-ghost" %>
     <h3 class="mb-0"></h3>
@@ -6,38 +13,34 @@
   </div>
 </div>
 
-<div class="container py-5">
+<div class="container py-4">
   <div class="row">
-  <div class="col-12 col-sm-6 col-md-8">
-    <h3>Reviews</h3>
-      <% if @shop.reviews.empty? %>
-        <small><em class="text-muted">Be the first one to review this shop</em></small>
-      <% else %>
-        <% @shop.reviews.each do |review| %>
-          <div>
-            <% review.rating.to_i.times do %>
-              <i class="fas fa-star star-yellow"></i>
-            <% end %>
-            <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
-            <p class="mb-0"><%= review.description %></p>
-          </div>
+    <div class="col-12 col-sm-6 col-md-8">
+      <h3>Reviews</h3>
+        <% if @shop.reviews.empty? %>
+          <small><em class="text-muted">Be the first one to review this shop</em></small>
+        <% else %>
+          <% @shop.reviews.each do |review| %>
+            <div>
+              <% review.rating.to_i.times do %>
+                <i class="fas fa-star star-yellow"></i>
+              <% end %>
+              <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+              <p class="mb-0"><%= review.description %></p>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-  </div>
-
-
-
-  <div class="col-12 col-sm-6 col-md-4">
-    <div class="bg-white rounded p-3 shadow">
-      <h3>Write a review</h3>
-      <%= simple_form_for([@shop, @review]) do |f| %>
-        <%= f.input :rating, as: :select, collection: (1..5), wrapper_html: { class: 'py-3' } %>
-        <%= f.input :description, as: :text, placeholder: 'What do you think of this shop?', label: false, input_html: { class: 'w-100' }  %>
-        <%= f.submit class: 'btn btn-flat mt-2' %>
-      <% end %>
     </div>
 
-
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="bg-white rounded p-3 shadow">
+        <h3>Write a review</h3>
+        <%= simple_form_for([@shop, @review]) do |f| %>
+          <%= f.input :rating, as: :select, collection: (1..5), wrapper_html: { class: 'py-3' } %>
+          <%= f.input :description, as: :text, placeholder: 'What do you think of this shop?', label: false, input_html: { class: 'w-100' }  %>
+          <%= f.submit class: 'btn btn-flat mt-2' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
